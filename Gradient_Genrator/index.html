@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradient Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #f0f0f0;
+        }
+
+        section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+            position: relative;
+            background-image: url('bg.png');
+            /* Replace with your actual logo URL */
+            background-size: 100px 100px;
+            /* Adjust the size of the logo */
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-opacity: 0.1;
+        }
+
+        button {
+            padding: 15px 30px;
+            margin: 15px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 18px;
+            color: white;
+            font-style: italic;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            margin: 20px 0;
+            font-size: 22px;
+            font-style: italic;
+        }
+
+        .copyCode {
+            padding: 15px;
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            user-select: none;
+            font-style: italic;
+            transition: background 0.3s ease;
+        }
+
+        .copyCode:hover {
+            background: #e4e4e4;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div>
+            <button id="mybtn">#051937</button>
+            <button id="mybtn2">#008793</button>
+        </div>
+        <h2>Copy your code here</h2>
+        <div class="copyCode">
+            background-image: linear-gradient(to right, rgb(92,145,229), rgb(152,63,198));
+        </div>
+    </section>
+    <script>
+        let btn1 = document.getElementById("mybtn");
+        let btn2 = document.getElementById("mybtn2");
+        let copyDiv = document.querySelector(".copyCode");
+        let rgb1 = "#000";
+        let rgb2 = "#fff"
+        const hexValues = () => {
+            let myHexValues = "0123456789abcdef";
+            let colors = "#";
+
+            for (let i = 0; i < 6; i++) {
+                colors += myHexValues[Math.floor(Math.random() * 16)];
+            }
+            return colors;
+        }
+
+        const handleButton1 = () => {
+            rgb1 = hexValues();
+            console.log(rgb1);
+            btn1.innerText = rgb1;
+            document.body.style.backgroundImage = `linear-gradient(to right,${rgb1},${rgb2})`;
+            copyDiv.innerHTML = `background-image:linear-gradient(to right,${rgb1},${rgb2})`;
+        }
+
+        const handleButton2 = () => {
+            rgb2 = hexValues();
+            console.log(rgb2);
+            btn2.innerText = rgb2;
+            document.body.style.backgroundImage = `linear-gradient(to right,${rgb1},${rgb2})`;
+            copyDiv.innerHTML = `background-image:linear-gradient(to right,${rgb1},${rgb2})`;
+        }
+
+        btn1.addEventListener("click", handleButton1);
+        btn2.addEventListener("click", handleButton2);
+
+        copyDiv.addEventListener('click', () => {
+            navigator.clipboard.writeText(copyDiv.innerHTML);
+        });
+    </script>
+</body>
+
+</html>
